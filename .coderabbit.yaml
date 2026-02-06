@@ -1,0 +1,33 @@
+version: 1
+policy:
+  name: 'Chimera AI Code Review Policy'
+  description: 'Rules for automated AI-assisted code review focused on spec alignment, security, and no unauthorized behavior.'
+  checks:
+    - id: spec-alignment
+      title: 'Spec Alignment'
+      description: |
+        Verify that code changes implement behavior only as described in the approved specifications. The reviewer MUST:
+        - Identify the `specRef` or spec file that covers the changed behavior.
+        - Confirm the change maps to explicit requirements and acceptance criteria in the spec.
+        - Flag any missing or ambiguous specs and refuse to approve changes that implement undocumented behavior.
+      severity: high
+
+    - id: security-vulnerabilities
+      title: 'Security Best Practices'
+      description: |
+        Check for common security issues including but not limited to: injection, insecure secrets handling, improper authentication/authorization, unsafe deserialization, and use of outdated vulnerable dependencies. The reviewer MUST:
+        - Ensure secrets are not hard-coded or logged.
+        - Verify use of secure defaults for network calls and storage.
+        - Recommend mitigations or refuse the change when high-severity vulnerabilities are present.
+      severity: high
+
+    - id: no-unauthorized-behavior
+      title: 'No Unauthorized Behavior'
+      description: |
+        Ensure the code does not introduce behaviors that violate governance: direct external calls bypassing MCP, data exfiltration, privilege escalation, or autonomous actions that require Super-Orchestrator approval. The reviewer MUST:
+        - Reject changes that add direct outbound network calls outside MCP gateways.
+        - Reject code that modifies constitution or governance behavior without a corresponding ratified spec.
+      severity: critical
+
+  instructions: |
+    Use conservative, spec-first judgement. When in doubt, require human approval from the Super-Orchestrator or the designated governance role. Provide clear, actionable review comments, reference exact spec sections, and include example remediation steps.

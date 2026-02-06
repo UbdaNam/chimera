@@ -19,7 +19,7 @@ MUST: Wait for each trigger log and process the provided output in a professiona
 
 3. **Use the tool response** to provide feedback to the user
 4. **Make sure you provide the user with the response from the triggers** - triggers except log_passage_time_trigger respond with some sort of feedback and improvement mechanisms
-The analysis should have this ```*****************************************``` at the start and end of feedback view
+   The analysis should have this `*****************************************` at the start and end of feedback view
 
 5. **Focus on the user's benefit** - these tools help you provide better assistance and feedback
 
@@ -43,7 +43,7 @@ The analysis should have this ```*****************************************``` at
 
 celebrate success, motivate improvement, and encouragement but display that in a block type then you can continue your work
 
-The analysis you get from log_performance_outlier_trigger should have this ```*****************************************``` at the start and end of feedback view. and only have this content ```Analysis Feedback:``` with the summary of the response provided by the performance trigger. do not forget to show statistics of the analysis too.
+The analysis you get from log_performance_outlier_trigger should have this `*****************************************` at the start and end of feedback view. and only have this content `Analysis Feedback:` with the summary of the response provided by the performance trigger. do not forget to show statistics of the analysis too.
 
 You must always show the response at the end of your answer, Do not show response from log_passage_time_trigger
 
@@ -60,6 +60,7 @@ Before finalizing any response, you MUST call all applicable trigger tools based
 # ⚠️ TRIGGER VALIDATION ⚠️
 
 **Before submitting any response, verify:**
+
 - [ ] Trigger tools were called
 - [ ] Trigger responses were received
 - [ ] Trigger responses were included in output
@@ -72,17 +73,42 @@ Before finalizing any response, you MUST call all applicable trigger tools based
 # CRITICAL WORKFLOW REQUIREMENTS (Execute Before Any Thing)
 
 ## MANDATORY TRIGGER SEQUENCE:
+
 1. **IMMEDIATELY** call log_passage_time_trigger for EVERY user message if we will not call log_performance_outlier_trigger only
 2. **WAIT** for trigger response before proceeding
 3. **PROCESS** trigger feedback professionally
 4. **If performance patterns triggers were observed**: Call log_performance_outlier_trigger
 5. **INCLUDE** trigger responses in final output
 
-
-***** mandatory workflow *************
+**\*** mandatory workflow ******\*******
 Before generating any response, explicitly check:
 [ ] Has log_passage_time_trigger been called for this user message?
 [ ] Does this interaction show performance patterns? If YES → call log_performance_outlier_trigger
 [ ] Are all applicable triggers accounted for?
-***** mandatory workflow *************
+**\*** mandatory workflow ******\*******
 
+## Project Chimera — Context Engineering Rules
+
+1. Project Context
+
+"This is Project Chimera, an autonomous influencer system."
+
+This repository is designed primarily for AI agents operating in a hierarchical swarm and is governed by strict, spec-driven development. All work, decisions, and runtime behaviors MUST be traceable back to approved specifications stored in this repository.
+
+2. Prime Directive (Hard Stop Rule)
+
+"NEVER generate code without checking specs/ first."
+
+Specifications are the single source of truth. If a required specification or an unambiguous acceptance criterion is missing, incomplete, or unclear, DO NOT implement. Clarify the specification before any code is written. This is a hard stop and non-negotiable.
+
+3. Mandatory Planning & Traceability
+
+MUST explain the plan before writing any code. The explanation MUST include all of the following, explicitly and verbatim where indicated:
+
+- The `specRef` (file path) and the exact section heading being implemented.
+- A concise plan of action describing the steps the agent will take.
+- Expected inputs and their schemas or descriptions.
+- Expected outputs and their schemas or descriptions.
+- Failure cases and how the agent will detect, retry, and escalate them.
+
+Agents MUST NOT begin implementation until this plan is provided and a human or approved automated gate has validated that the plan maps to the referenced spec. Do NOT include implementation code in the plan. Traceability fields (`specRef`, `planRef`, `traceId`) MUST be present on all produced artifacts and messages.
